@@ -1,0 +1,243 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+   */
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  font-family: Open Sans;
+  background-color: #e8f1f5;
+  font-family: Roboto;
+}
+
+.highlight {
+  display: inline-block;
+  background-color: rgba(0, 0, 255, 0.5);
+}
+
+.searchform {
+  display: flex;
+  height: 50px;
+  margin: 50px auto;
+  max-width: 800px;
+}
+
+.searchform input {
+  width: 800px;
+  border: none;
+  font-size: 20px;
+  padding-left: 20px;
+  box-shadow: 3px 4px 5px -4px rgba(0, 0, 0, 0.75);
+}
+
+.active {
+  background-color: #e8e8e8 !important;
+}
+
+.item {
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 1px solid #f1f1f1;
+  background-color: #fbf9f9;
+  display: flex;
+}
+
+.item:hover {
+  background-color: #f1f1f1;
+}
+
+.item__id {
+  width: 40px;
+  text-align: center;
+}
+
+.item__title {
+  width: 300px;
+  cursor: pointer;
+}
+
+.item__town {
+  width: 250px;
+}
+
+.item__likes {
+  width: 100px;
+}
+
+.item__price {
+  width: 100px;
+}
+
+.list {
+  margin: 50px auto;
+  max-width: 800px;
+  background-color: #fff;
+  box-shadow: 3px 4px 5px -4px rgba(0, 0, 0, 0.75);
+}
+
+.list ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.list ul li {
+  display: flex;
+  flex-direction: column;
+}
+
+.list ul li .showDesc {
+  height: 150px;
+  min-height: 150px;
+  transition: height 1s;
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+
+.list ul li .desc {
+  display: flex;
+  overflow: hidden;
+  height: 0;
+  transition: height 1s;
+  box-shadow: inset 0px 0px 11px -6px rgba(0, 0, 0, 0.75);
+}
+
+.list ul li .desc .description {
+  width: 450px;
+  padding-left: 15px;
+}
+
+.list ul li .desc .address {
+  width: 200px;
+}
+

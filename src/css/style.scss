@@ -1,0 +1,26 @@
+@import url('../libs/bootstrap/css/bootstrap.css');
+@import url('../libs/bootstrap/css/bootstrap-theme.css');
+.main__wrap {
+  width: 1200px;
+  margin: 0 auto;
+}
+summary {
+  outline: 0;
+}
+details {
+  max-height: 400px !important;
+  overflow-y: scroll;
+}
+.form__2 {
+  display: flex;
+  justify-content: space-between;
+  .text {
+    width: 50% !important;
+  }
+  .quantity {
+    width: 20% !important;
+  }
+}
+.custom__buttons {
+  cursor: pointer;
+}
