@@ -5,10 +5,10 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import configureStore from './store/configureStore';
 
+import Main from './containers/Main/Main';
 import Incomes from './containers/Incomes/Incomes';
 import Spending from './containers/Spending/Spending';
 import Categories from './containers/Categories/Categories';
-import InvoiceCreate from './containers/InvoiceCreate/InvoiceCreate';
 import Home from './containers/Home/Home';
 
 
@@ -18,11 +18,10 @@ render(
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={Home}>
-                <IndexRoute component={Incomes} />
-                <Route path="/create-invoice" component={InvoiceCreate}/>
+                <IndexRoute component={Main} />
+                <Route path="/incomes" component={Incomes}/>
                 <Route path="/spending" component={Spending}/>
                 <Route path="/categories" component={Categories}/>
-                {/*<Route path="/customers" component={Customers}/>*/}
             </Route>
         </Router>
     </Provider>,

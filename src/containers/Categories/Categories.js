@@ -45,6 +45,40 @@ class Categories extends Component {
             addCategory(dataToPost);
         }
     };
+    editCategory = e => {
+        e.preventDefault();
+        const {
+            categoriesFormFields,
+            categoriesList,
+            editCategory
+        } = this.props;
+        if (categoriesFormFields.name.length !== 0) {
+            const newItem = {
+                id: categoriesFormFields.id,
+                name: categoriesFormFields.name
+            };
+            const dataToPut = {
+                ...categoriesList,
+                [categoriesFormFields.id]: newItem
+            };
+            editCategory(dataToPut);
+        }
+    };
+    cancelEditCategory =  e => {
+        e.preventDefault();
+        const {
+            cancelEditCategory
+        } = this.props;
+        cancelEditCategory();
+    };
+    takeToEditCategory = (id) => e => {
+        e.preventDefault();
+        const {
+            categoriesList,
+            takeToEditCategory
+        } = this.props;
+        takeToEditCategory(categoriesList[id]);
+    };
     deleteCategory = (id) => e => {
         e.preventDefault();
         const {
@@ -72,6 +106,7 @@ class Categories extends Component {
             <tr key={`category__${index}`}>
                 <td>{index+1}</td>
                 <td>{categoriesList[keys].name}</td>
+                <td><button className="btn btn-warning" onClick={this.takeToEditCategory(categoriesList[keys].id)}>Edit</button></td>
                 <td><button className="btn btn-danger" onClick={this.deleteCategory(categoriesList[keys].id)}>Delete</button></td>
             </tr>
         ));
@@ -85,7 +120,16 @@ class Categories extends Component {
                                 <label htmlFor="name">Name:</label>
                                 <input type="text" className="form-control" placeholder="Name" id="name" onChange={this.edit('name')} value={categoriesFormFields.name}/>
                             </div>
-                            <button className="btn btn-success" onClick={this.addCategory}>Add</button>
+                            {
+                                categoriesFormFields.isNew
+                                    ?
+                                    <button className="btn btn-success" onClick={this.addCategory}>Add</button>
+                                    :
+                                    <div>
+                                        <button className="btn btn-warning" onClick={this.editCategory}>Edit</button>
+                                        <button className="btn btn-default" onClick={this.cancelEditCategory}>Cancel</button>
+                                    </div>
+                            }
                         </form>
                     </div>
                     {

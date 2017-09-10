@@ -4,7 +4,7 @@ Setup guide
 - Install node js
 
 commands below:
-- git clone https://github.com/heiets/invoices-test.git
-go to app directory (-cd react-tabs)
+- git clone https://github.com/heiets/spendee-test.git
+go to app directory (-cd spendee-test)
 - npm install
 - npm start

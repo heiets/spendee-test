@@ -4,16 +4,16 @@
 
 import { combineReducers } from 'redux';
 
+import Main from './containers/Main/reducers';
 import Incomes from './containers/Incomes/reducers';
 import Spending from './containers/Spending/reducers';
 import Categories from './containers/Categories/reducers';
-import InvoiceCreate from './containers/InvoiceCreate/reducers';
 
 const rootReducer = combineReducers({
+    Main,
     Incomes,
     Spending,
-    Categories,
-    InvoiceCreate
+    Categories
 });
 
 export default rootReducer;

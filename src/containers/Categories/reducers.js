@@ -4,7 +4,8 @@ const initialState = {
     categoriesList: [
     ],
     categoriesFormFields: {
-        name: ''
+        name: '',
+        isNew: true
     }
 };
 const categoriesList = (state = initialState.categoriesList, action) => {
@@ -19,6 +20,8 @@ const categoriesList = (state = initialState.categoriesList, action) => {
             return newCategories;
         case 'POST_CATEGORY_SUCCESS':
             return action.returnData;
+        case 'PUT_CATEGORY_SUCCESS':
+            return action.returnData;
         case 'DELETE_CATEGORY_SUCCESS':
             return action.returnData;
         default:
@@ -32,9 +35,27 @@ const categoriesFormFields = (state = initialState.categoriesFormFields, action)
                 ...state,
                 [action.field]: action.value
             };
+        case 'TAKE_TO_EDIT_CATEGORY':
+            return {
+                ...state,
+                id: action.json.id,
+                name: action.json.name,
+                isNew: false
+            };
+        case 'PUT_CATEGORY_SUCCESS':
+            return {
+                name: '',
+                isNew: true
+            };
+        case 'CANCEL_EDIT_CATEGORY':
+            return {
+                name: '',
+                isNew: true
+            };
         case 'POST_CATEGORY_SUCCESS':
             return {
-                name: ''
+                name: '',
+                isNew: true
             };
         default:
             return state;

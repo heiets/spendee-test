@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 import Header from '../../components/Header';
 import * as actions from '../Spending/actions';
@@ -9,10 +12,18 @@ class Spending extends Component {
     constructor(props) {
         super(props);
         const {
-            fetchSpending
+            fetchSpending,
+            fetchCategories
         } = this.props;
         fetchSpending();
+        fetchCategories();
     }
+    selectCategory = () => e => {
+        const {
+            selectCategory
+        } = this.props;
+        selectCategory(e.value);
+    };
     addSpending = (e) => {
         e.preventDefault();
         const {
@@ -37,8 +48,12 @@ class Spending extends Component {
             const newItem = {
                 id,
                 amount: spendingFormFields.amount,
-                description: spendingFormFields.description
+                description: spendingFormFields.description,
+                date: moment().format('lll')
             };
+            if (spendingFormFields.category_name) {
+                newItem.category = spendingFormFields.category_name;
+            }
             const dataToPost = {
                 ...spendingList,
                 [id]: newItem
@@ -46,7 +61,44 @@ class Spending extends Component {
             addSpending(dataToPost);
         }
     };
-    deleteSpending = (id) => e => {
+    editSpending = e => {
+        e.preventDefault();
+        const {
+            spendingFormFields,
+            spendingList,
+            editSpending
+        } = this.props;
+        if (spendingFormFields.amount.length !== 0 && spendingFormFields.description.length !== 0) {
+            const newItem = {
+                id: spendingFormFields.id,
+                amount: spendingFormFields.amount,
+                description: spendingFormFields.description,
+                category: spendingFormFields.category_name,
+                date: moment().format('lll')
+            };
+            const dataToPut = {
+                ...spendingList,
+                [spendingFormFields.id]: newItem
+            };
+            editSpending(dataToPut);
+        }
+    };
+    cancelEditSpending =  e => {
+        e.preventDefault();
+        const {
+            cancelEditSpending
+        } = this.props;
+        cancelEditSpending();
+    };
+    takeToEditSpending = id => e => {
+        e.preventDefault();
+        const {
+            spendingList,
+            takeToEditSpending
+        } = this.props;
+        takeToEditSpending(spendingList[id]);
+    };
+    deleteSpending = id => e => {
         e.preventDefault();
         const {
             spendingList,
@@ -67,6 +119,7 @@ class Spending extends Component {
     render() {
         const {
             spendingList,
+            categoriesList,
             spendingFormFields
         } = this.props;
         const spendingToShow = spendingList && Object.keys(spendingList).map((keys, index) => (
@@ -74,7 +127,9 @@ class Spending extends Component {
                 <td>{index+1}</td>
                 <td>{spendingList[keys].amount}</td>
                 <td>{spendingList[keys].description}</td>
-                {/*<td>{spendingList[keys].date}</td>*/}
+                <td>{spendingList[keys].category}</td>
+                <td>{spendingList[keys].date}</td>
+                <td><button className="btn btn-warning" onClick={this.takeToEditSpending(spendingList[keys].id)}>Edit</button></td>
                 <td><button className="btn btn-danger" onClick={this.deleteSpending(spendingList[keys].id)}>Delete</button></td>
             </tr>
         ));
@@ -92,7 +147,26 @@ class Spending extends Component {
                                 <label htmlFor="price">Description:</label>
                                 <input type="text" className="form-control" id="description" placeholder="Description" onChange={this.edit('description')} value={spendingFormFields.description}/>
                             </div>
-                            <button className="btn btn-success" onClick={this.addSpending}>Add</button>
+                            <div className="form-group">
+                                <label htmlFor="sel1">Category:</label>
+                                <Select
+                                    name="form-field-name"
+                                    options={categoriesList}
+                                    onChange={this.selectCategory()}
+                                    value={spendingFormFields.category_name}
+                                    clearable={false}
+                                />
+                            </div>
+                            {
+                                spendingFormFields.isNew
+                                    ?
+                                    <button className="btn btn-success" onClick={this.addSpending}>Add</button>
+                                    :
+                                    <div>
+                                        <button className="btn btn-warning" onClick={this.editSpending}>Edit</button>
+                                        <button className="btn btn-default" onClick={this.cancelEditSpending}>Cancel</button>
+                                    </div>
+                            }
                         </form>
                     </div>
                     {
@@ -106,7 +180,8 @@ class Spending extends Component {
                                     <th>Id</th>
                                     <th>Amount</th>
                                     <th>Description</th>
-                                    {/*<th>Date</th>*/}
+                                    <th>Category</th>
+                                    <th>Date</th>
                                 </tr>
                                 </thead>
                                 <tbody>

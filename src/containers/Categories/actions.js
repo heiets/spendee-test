@@ -13,7 +13,7 @@ export const fetchCategories = () => {
         }
     }
 };
-export const addCategory = (jsonToPost) => {
+export const addCategory = jsonToPost => {
     return dispatch => {
         localStorage.setItem('CategoriesList', JSON.stringify(jsonToPost));
         dispatch({
@@ -22,13 +22,33 @@ export const addCategory = (jsonToPost) => {
         })
     }
 };
-export const deleteCategory = (jsonToPost) => {
+export const deleteCategory = jsonToPost => {
     return dispatch => {
         localStorage.setItem('CategoriesList',  JSON.stringify(jsonToPost));
         dispatch({
             type: 'DELETE_CATEGORY_SUCCESS',
             returnData: jsonToPost
         })
+    }
+};
+export const editCategory = jsonToPut => {
+    return dispatch => {
+        localStorage.setItem('CategoriesList', JSON.stringify(jsonToPut));
+        dispatch({
+            type: 'PUT_CATEGORY_SUCCESS',
+            returnData: jsonToPut
+        })
+    }
+};
+export const takeToEditCategory = json => {
+    return {
+        type: 'TAKE_TO_EDIT_CATEGORY',
+        json
+    }
+};
+export const cancelEditCategory = () => {
+    return {
+        type: 'CANCEL_EDIT_CATEGORY'
     }
 };
 export const editField = (field, value) => {

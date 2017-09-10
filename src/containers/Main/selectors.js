@@ -1,13 +1,15 @@
 import { createStructuredSelector } from 'reselect';
 
-const REDUCER = 'Incomes';
+const REDUCER = 'Main';
 
+const selectedCategory = state => state[REDUCER].selectedCategory;
 const incomesList = state => state[REDUCER].incomesList;
+const spendingList = state => state[REDUCER].spendingList;
 const categoriesList = state => state[REDUCER].categoriesList;
-const incomesFormFields = state => state[REDUCER].incomesFormFields;
 
 export default createStructuredSelector({
+    selectedCategory,
     incomesList,
-    categoriesList,
-    incomesFormFields
+    spendingList,
+    categoriesList
 });
